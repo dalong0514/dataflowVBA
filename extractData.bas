@@ -2,7 +2,6 @@ Public Sub ExtractEquipDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
   Dim MyFName As String
-  Dim nowDate As String
   Dim sht As Worksheet
   Dim extractedData As String
   
