@@ -1,21 +1,19 @@
-Public Sub CreateTxtFile()
+Public Sub ExtractEquipDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
   Dim MyFName As String
-  Dim i As Integer
   Dim nowDate As String
   Dim sht As Worksheet
+  Dim extractedData As String
   
-  nowDate = CDate(Now())
-  nowDate = Replace(nowDate, ":", "") 
-
-  MyFName = "E:\2.txt" 
+  MyFName = "D:\dataflowcad\NsTempData\equip.txt" 
+  
   Set fso = CreateObject("Scripting.FileSystemObject") 
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True) 
 
-  For Each sht In ThisWorkbook.Worksheets 
-    myTxt.Write "dalong,\\n"
-  Next
+  extractedData = Range("K8").Value
+  'Range("A4").Value = 200
+  myTxt.Write extractedData
   
   myTxt.Close
   Set myTxt = Nothing
