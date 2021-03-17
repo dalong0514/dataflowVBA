@@ -13,7 +13,7 @@ Public Sub ExtractEquipDataToCSV()
   row = 1
   column = 1
   Do While Range("B2:U100").Cells(row, 1).Value <> ""
-    For column = 1 To 19
+    For column = 1 To 20
       myTxt.Write ","
       myTxt.Write Range("B2:U100").Cells(row, column).Value
       
