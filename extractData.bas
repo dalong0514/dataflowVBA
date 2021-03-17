@@ -12,10 +12,10 @@ Public Sub ExtractEquipDataToCSV()
 
   row = 1
   column = 1
-  Do While Range("B2:S100").Cells(row, 1).Value <> ""
+  Do While Range("B2:U100").Cells(row, 1).Value <> ""
     For column = 1 To 19
       myTxt.Write ","
-      myTxt.Write Range("B2:S100").Cells(row, column).Value
+      myTxt.Write Range("B2:U100").Cells(row, column).Value
       
     Next column
     myTxt.Write vbCr
