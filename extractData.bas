@@ -85,12 +85,52 @@ Public Sub ExtractBsGCTDataToCSV()
   row = 1
   column = 1
   Do While Sheet2.Range("B3:H3000").Cells(row, 1).Value <> ""
-  myTxt.Write ",nozzle"
+    myTxt.Write ",nozzle"
     For column = 1 To 7
       myTxt.Write ","
       myTxt.Write Sheet2.Range("B3:H3000").Cells(row, column).Value
       
     Next column
+    myTxt.Write vbCr
+    row = row + 1
+  Loop
+
+  ' Extract the Tank Standard data
+  row = 1
+  Do While Sheet3.Range("C3:C12").Cells(row, 1).Value <> ""
+    myTxt.Write ",Tank-Standard"
+    myTxt.Write ","
+    myTxt.Write Sheet3.Range("C3:C12").Cells(row, 1).Value
+    myTxt.Write vbCr
+    row = row + 1
+  Loop
+
+  ' Extract the Tank Standard data
+  row = 1
+  Do While Sheet3.Range("D15:D19").Cells(row, 1).Value <> ""
+    myTxt.Write ",Tank-HeadStyle"
+    myTxt.Write ","
+    myTxt.Write Sheet3.Range("D15:D19").Cells(row, 1).Value
+    myTxt.Write vbCr
+    row = row + 1
+  Loop
+
+  ' Extract the Tank HeadMaterial data
+  row = 1
+  Do While Sheet3.Range("D20:D24").Cells(row, 1).Value <> ""
+    myTxt.Write ",Tank-HeadMaterial"
+    myTxt.Write ","
+    myTxt.Write Sheet3.Range("D20:D24").Cells(row, 1).Value
+    myTxt.Write vbCr
+    row = row + 1
+  Loop
+
+  ' Extract the Tank Other Request data
+  row = 1
+  Do While Sheet3.Range("C27:C40").Cells(row, 1).Value <> ""
+    myTxt.Write ",Tank-OtherRequest"
+    myTxt.Write ","
+    myTxt.Write Sheet3.Range("C27:C40").Cells(row, 1).Value
     myTxt.Write vbCr
     row = row + 1
   Loop
