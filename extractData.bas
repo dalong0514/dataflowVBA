@@ -33,7 +33,6 @@ Public Sub ExtractEquipDataToCSV()
   Dim myTxt As Object
   Dim MyFName As String
   Dim row As Integer, column As Integer
-  Dim extractedData As String
   
   MyFName = "D:\dataflowcad\nsdata\tempEquip.csv"
   
@@ -63,7 +62,6 @@ Public Sub ExtractBsGCTDataToCSV()
   Dim myTxt As Object
   Dim MyFName As String
   Dim row As Integer, column As Integer
-  Dim extractedData As String
   
   MyFName = "D:\dataflowcad\bsdata\bsGCT.csv"
   
@@ -73,8 +71,8 @@ Public Sub ExtractBsGCTDataToCSV()
   row = 1
   column = 1
   Do While Sheet1.Range("B2:U100").Cells(row, 1).Value <> ""
-    myTxt.Write ",design"
-    For column = 1 To 20
+    myTxt.Write ",Tank"
+    For column = 1 To 22
       myTxt.Write ","
       myTxt.Write Sheet1.Range("B2:U100").Cells(row, column).Value
       
