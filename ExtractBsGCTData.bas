@@ -3,41 +3,17 @@ Public Sub ExtractBsGCTDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
   Dim MyFName As String
-  Dim row As Integer, column As Integer
   
   MyFName = "D:\dataflowcad\bsdata\bsGCT.csv"
   
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
-  row = 1
-  column = 1
+  ' Extract main data
   ' the column in range can be wrong. eg [X100]
-  Do While Sheet1.Range("B2:X100").Cells(row, 1).Value <> ""
-    myTxt.Write ",Tank"
-    For column = 1 To 23
-      myTxt.Write ","
-      myTxt.Write Sheet1.Range("B2:X100").Cells(row, column).Value
-      
-    Next column
-    myTxt.Write vbCr
-    row = row + 1
-  Loop
-
+  Call ExtractColumnsData(Sheet1.Range("B2:X100"), 23, ",Tank", myTxt)
   ' Extract the nozzle data
-  row = 1
-  column = 1
-  Do While Sheet2.Range("B3:H3000").Cells(row, 1).Value <> ""
-    myTxt.Write ",nozzle"
-    For column = 1 To 7
-      myTxt.Write ","
-      myTxt.Write Sheet2.Range("B3:H3000").Cells(row, column).Value
-      
-    Next column
-    myTxt.Write vbCr
-    row = row + 1
-  Loop
-
+  Call ExtractColumnsData(Sheet2.Range("B3:H3000"), 7, ",nozzle", myTxt)
   ' Extract the Tank Standard data
   Call ExtractOneColumnData(Sheet3.Range("C3:C12"), ",Tank-Standard", myTxt)
   ' Extract the Tank HeadStyle data
@@ -60,6 +36,21 @@ Sub ExtractOneColumnData(range, dataTypeString, myTxt)
     myTxt.Write dataTypeString
     myTxt.Write ","
     myTxt.Write range.Cells(row, 1).Value
+    myTxt.Write vbCr
+    row = row + 1
+  Loop
+End Sub
+
+Sub ExtractColumnsData(range, columnNum, dataTypeString, myTxt)
+  Dim row As Integer, column As Integer
+  row = 1
+  column = 1
+  Do While range.Cells(row, 1).Value <> ""
+    myTxt.Write dataTypeString
+    For column = 1 To columnNum
+      myTxt.Write ","
+      myTxt.Write range.Cells(row, column).Value
+    Next column
     myTxt.Write vbCr
     row = row + 1
   Loop
