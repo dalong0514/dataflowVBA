@@ -39,47 +39,28 @@ Public Sub ExtractBsGCTDataToCSV()
   Loop
 
   ' Extract the Tank Standard data
-  row = 1
-  Do While Sheet3.Range("C3:C12").Cells(row, 1).Value <> ""
-    myTxt.Write ",Tank-Standard"
-    myTxt.Write ","
-    myTxt.Write Sheet3.Range("C3:C12").Cells(row, 1).Value
-    myTxt.Write vbCr
-    row = row + 1
-  Loop
-
-  ' Extract the Tank Standard data
-  row = 1
-  Do While Sheet3.Range("D15:D19").Cells(row, 1).Value <> ""
-    myTxt.Write ",Tank-HeadStyle"
-    myTxt.Write ","
-    myTxt.Write Sheet3.Range("D15:D19").Cells(row, 1).Value
-    myTxt.Write vbCr
-    row = row + 1
-  Loop
-
+  Call ExtractOneColumnData(Sheet3.Range("C3:C12"), ",Tank-Standard", myTxt)
+  ' Extract the Tank HeadStyle data
+  Call ExtractOneColumnData(Sheet3.Range("D15:D19"), ",Tank-HeadStyle", myTxt)
   ' Extract the Tank HeadMaterial data
-  row = 1
-  Do While Sheet3.Range("D20:D24").Cells(row, 1).Value <> ""
-    myTxt.Write ",Tank-HeadMaterial"
-    myTxt.Write ","
-    myTxt.Write Sheet3.Range("D20:D24").Cells(row, 1).Value
-    myTxt.Write vbCr
-    row = row + 1
-  Loop
-
+  Call ExtractOneColumnData(Sheet3.Range("D20:D24"), ",Tank-HeadMaterial", myTxt)
   ' Extract the Tank Other Request data
-  row = 1
-  Do While Sheet3.Range("C27:C40").Cells(row, 1).Value <> ""
-    myTxt.Write ",Tank-OtherRequest"
-    myTxt.Write ","
-    myTxt.Write Sheet3.Range("C27:C40").Cells(row, 1).Value
-    myTxt.Write vbCr
-    row = row + 1
-  Loop
+  Call ExtractOneColumnData(Sheet3.Range("C27:C40"), ",Tank-OtherRequest", myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
   Set fso = Nothing
   MsgBox "Extract Sucess!"
+End Sub
+
+Sub ExtractOneColumnData(range, dataTypeString, myTxt)
+  Dim row As Integer
+  row = 1
+  Do While range.Cells(row, 1).Value <> ""
+    myTxt.Write dataTypeString
+    myTxt.Write ","
+    myTxt.Write range.Cells(row, 1).Value
+    myTxt.Write vbCr
+    row = row + 1
+  Loop
 End Sub
