@@ -11,9 +11,11 @@ Public Sub ExtractBsGCTDataToCSV()
 
   ' Extract main data
   ' the column in range can be wrong. eg [X100]
-  Call ExtractColumnsData(Sheet1.Range("B2:X100"), 23, ",Tank", myTxt)
+  Call ExtractColumnsData(Sheet1.Range("B3:X100"), 23, ",Tank", myTxt)
+  Call ExtractOneRowData(Sheet1.Range("B2:X2"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
   ' Extract the nozzle data
-  Call ExtractColumnsData(Sheet2.Range("B3:H3000"), 7, ",nozzle", myTxt)
+  Call ExtractOneRowData(Sheet2.Range("B2:H2"), ",NozzleKeys", myTxt)
+  Call ExtractColumnsData(Sheet2.Range("B4:H3000"), 7, ",Nozzle", myTxt)
   ' Extract the Tank Standard data
   Call ExtractOneColumnData(Sheet3.Range("C3:C12"), ",Tank-Standard", myTxt)
   ' Extract the Tank HeadStyle data
@@ -39,6 +41,18 @@ Sub ExtractOneColumnData(range, dataTypeString, myTxt)
     myTxt.Write vbCr
     row = row + 1
   Loop
+End Sub
+
+Sub ExtractOneRowData(range, dataTypeString, myTxt)
+  Dim column As Integer
+  column = 1
+  myTxt.Write dataTypeString
+  Do While range.Cells(1, column).Value <> ""
+    myTxt.Write ","
+    myTxt.Write range.Cells(1, column).Value
+    column = column + 1
+  Loop
+  myTxt.Write vbCr
 End Sub
 
 Sub ExtractColumnsData(range, columnNum, dataTypeString, myTxt)
