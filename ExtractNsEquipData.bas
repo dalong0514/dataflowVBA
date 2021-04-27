@@ -38,7 +38,7 @@ Public Sub ExtractNsEquipData()
 
   ' Extract the data for special Range
   ' the frist row will be abandoned in autoLisp
-  Call ExtractRangeData(Sheet1.Range("Q6:AR150"), 200, 28, myTxt)
+  Call ExtractRangeData(Sheet1.Range("Q6:AR150"), 500, 28, myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
