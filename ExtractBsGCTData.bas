@@ -17,13 +17,13 @@ Public Sub ExtractBsGCTDataToCSV()
   Call ExtractOneRowData(Sheet2.Range("B2:H2"), ",NozzleKeys", myTxt)
   Call ExtractColumnsData(Sheet2.Range("B4:H3000"), 7, ",Nozzle", myTxt)
   ' Extract the Tank Standard data
-  Call ExtractOneColumnData(Sheet3.Range("C3:C12"), ",Tank-Standard", myTxt)
+  Call ExtractOneColumnData(Sheet6.Range("C3:C12"), ",Tank-Standard", myTxt)
   ' Extract the Tank HeadStyle data
-  Call ExtractOneColumnData(Sheet3.Range("D15:D19"), ",Tank-HeadStyle", myTxt)
+  Call ExtractOneColumnData(Sheet6.Range("D15:D19"), ",Tank-HeadStyle", myTxt)
   ' Extract the Tank HeadMaterial data
-  Call ExtractOneColumnData(Sheet3.Range("D20:D24"), ",Tank-HeadMaterial", myTxt)
+  Call ExtractOneColumnData(Sheet6.Range("D20:D24"), ",Tank-HeadMaterial", myTxt)
   ' Extract the Tank Other Request data
-  Call ExtractOneColumnData(Sheet3.Range("C27:C40"), ",Tank-OtherRequest", myTxt)
+  Call ExtractOneColumnData(Sheet6.Range("C27:C40"), ",Tank-OtherRequest", myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
