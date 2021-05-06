@@ -16,6 +16,9 @@ Public Sub ExtractBsGCTDataToCSV()
   ' Extract the nozzle data
   Call ExtractOneRowData(Sheet2.Range("B2:H2"), ",NozzleKeys", myTxt)
   Call ExtractColumnsData(Sheet2.Range("B4:H3000"), 7, ",Nozzle", myTxt)
+  ' Extract the Tank PressureElement data
+  Call ExtractOneRowData(Sheet3.Range("B3:F3"), ",Tank-PressureElementKeys", myTxt)
+  Call ExtractColumnsData(Sheet3.Range("B5:F10"), 5, ",Tank-PressureElement", myTxt)
   ' Extract the Tank Standard data
   Call ExtractOneColumnData(Sheet6.Range("C3:C12"), ",Tank-Standard", myTxt)
   ' Extract the Tank HeadStyle data
