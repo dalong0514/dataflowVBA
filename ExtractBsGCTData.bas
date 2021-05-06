@@ -1,4 +1,4 @@
-' refactored at 2021-04-21
+' refactored at 2021-05-06
 Public Sub ExtractBsGCTDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
@@ -11,8 +11,8 @@ Public Sub ExtractBsGCTDataToCSV()
 
   ' Extract main data
   ' the column in range can be wrong. eg [X100]
-  Call ExtractColumnsData(Sheet1.Range("B3:X100"), 23, ",Tank", myTxt)
-  Call ExtractOneRowData(Sheet1.Range("B2:X2"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
+  Call ExtractColumnsData(Sheet1.Range("B4:X100"), 31, ",Tank", myTxt)
+  Call ExtractOneRowData(Sheet1.Range("B3:X3"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
   ' Extract the nozzle data
   Call ExtractOneRowData(Sheet2.Range("B2:H2"), ",NozzleKeys", myTxt)
   Call ExtractColumnsData(Sheet2.Range("B4:H3000"), 7, ",Nozzle", myTxt)
