@@ -12,7 +12,7 @@ Public Sub ExtractBsGCTDataToCSV()
   Call SetTankInspectRate(Sheet1.Range("R5:Z100"))
   ' Extract main data
   ' the column in range can be wrong. eg [X100]
-  Call ExtractColumnsData(Sheet1.Range("B4:X100"), 31, ",Tank", myTxt)
+  Call ExtractColumnsData(Sheet1.Range("B4:X100"), 33, ",Tank", myTxt)
   Call ExtractOneRowData(Sheet1.Range("B3:X3"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
   ' Extract the nozzle data
   Call ExtractOneRowData(Sheet2.Range("B2:H2"), ",NozzleKeys", myTxt)
