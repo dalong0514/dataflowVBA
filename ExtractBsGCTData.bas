@@ -14,12 +14,18 @@ Public Sub ExtractBsGCTDataToCSV()
   ' the column in range can be wrong. eg [X100]
   Call ExtractColumnsData(Sheet1.Range("B4:X100"), 33, ",Tank", myTxt)
   Call ExtractOneRowData(Sheet1.Range("B3:X3"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
+
   ' Extract the nozzle data
   Call ExtractOneRowData(Sheet2.Range("B2:H2"), ",NozzleKeys", myTxt)
   Call ExtractColumnsData(Sheet2.Range("B4:H3000"), 7, ",Nozzle", myTxt)
+
   ' Extract the Tank PressureElement data
   Call ExtractOneRowData(Sheet3.Range("B3:F3"), ",Tank-PressureElementKeys", myTxt)
   Call ExtractColumnsData(Sheet3.Range("B5:F10"), 5, ",Tank-PressureElement", myTxt)
+
+  ' Extract the support data
+  Call ExtractOneRowData(Sheet4.Range("B2:G2"), ",SupportKeys", myTxt)
+  Call ExtractColumnsData(Sheet4.Range("B4:G1000"), 6, ",Support", myTxt)
 
   ' Extract the Vertical Tank Standard data
   Call ExtractOneColumnData(Sheet5.Range("C3:C12"), ",Tank-Standard,verticalTank", myTxt)
