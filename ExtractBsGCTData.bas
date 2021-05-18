@@ -1,4 +1,4 @@
-' refactored at 2021-05-11
+' refactored at 2021-05-18
 Public Sub ExtractBsGCTDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
@@ -20,14 +20,24 @@ Public Sub ExtractBsGCTDataToCSV()
   ' Extract the Tank PressureElement data
   Call ExtractOneRowData(Sheet3.Range("B3:F3"), ",Tank-PressureElementKeys", myTxt)
   Call ExtractColumnsData(Sheet3.Range("B5:F10"), 5, ",Tank-PressureElement", myTxt)
-  ' Extract the Tank Standard data
-  Call ExtractOneColumnData(Sheet6.Range("C3:C12"), ",Tank-Standard", myTxt)
-  ' Extract the Tank HeadStyle data
-  Call ExtractOneColumnData(Sheet6.Range("D15:D19"), ",Tank-HeadStyle", myTxt)
-  ' Extract the Tank HeadMaterial data
-  Call ExtractOneColumnData(Sheet6.Range("D20:D24"), ",Tank-HeadMaterial", myTxt)
-  ' Extract the Tank Other Request data
-  Call ExtractOneColumnData(Sheet6.Range("C27:C40"), ",Tank-OtherRequest", myTxt)
+
+  ' Extract the Vertical Tank Standard data
+  Call ExtractOneColumnData(Sheet5.Range("C3:C12"), ",Tank-Standard,verticalTank", myTxt)
+  ' Extract the Vertical Tank HeadStyle data
+  Call ExtractOneColumnData(Sheet5.Range("D15:D19"), ",Tank-HeadStyle,verticalTank", myTxt)
+  ' Extract the Vertical Tank HeadMaterial data
+  Call ExtractOneColumnData(Sheet5.Range("D20:D24"), ",Tank-HeadMaterial,verticalTank", myTxt)
+  ' Extract the Vertical Tank Other Request data
+  Call ExtractOneColumnData(Sheet5.Range("C27:C40"), ",Tank-OtherRequest,verticalTank", myTxt)
+
+  ' Extract the Horizontal Tank Standard data
+  Call ExtractOneColumnData(Sheet6.Range("C3:C12"), ",Tank-Standard,horizontalTank", myTxt)
+  ' Extract the Horizontal Tank HeadStyle data
+  Call ExtractOneColumnData(Sheet6.Range("D15:D19"), ",Tank-HeadStyle,horizontalTank", myTxt)
+  ' Extract the Horizontal Tank HeadMaterial data
+  Call ExtractOneColumnData(Sheet6.Range("D20:D24"), ",Tank-HeadMaterial,horizontalTank", myTxt)
+  ' Extract the Horizontal Tank Other Request data
+  Call ExtractOneColumnData(Sheet6.Range("C27:C40"), ",Tank-OtherRequest,horizontalTank", myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
