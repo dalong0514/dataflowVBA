@@ -1,4 +1,4 @@
-' refactored at 2021-05-18
+' refactored at 2021-05-20
 Public Sub ExtractBsGCTDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
@@ -16,34 +16,34 @@ Public Sub ExtractBsGCTDataToCSV()
   Call ExtractOneRowData(Sheet1.Range("B3:X3"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
 
   ' Extract the nozzle data
-  Call ExtractOneRowData(Sheet2.Range("B2:H2"), ",NozzleKeys", myTxt)
-  Call ExtractColumnsData(Sheet2.Range("B4:H3000"), 7, ",Nozzle", myTxt)
+  Call ExtractOneRowData(Sheet3.Range("B2:H2"), ",NozzleKeys", myTxt)
+  Call ExtractColumnsData(Sheet3.Range("B4:H3000"), 7, ",Nozzle", myTxt)
 
   ' Extract the Tank PressureElement data
-  Call ExtractOneRowData(Sheet3.Range("B3:F3"), ",Tank-PressureElementKeys", myTxt)
-  Call ExtractColumnsData(Sheet3.Range("B5:F10"), 5, ",Tank-PressureElement", myTxt)
+  Call ExtractOneRowData(Sheet4.Range("B3:F3"), ",Tank-PressureElementKeys", myTxt)
+  Call ExtractColumnsData(Sheet4.Range("B5:F10"), 5, ",Tank-PressureElement", myTxt)
 
   ' Extract the support data
-  Call ExtractOneRowData(Sheet4.Range("B2:G2"), ",SupportKeys", myTxt)
-  Call ExtractColumnsData(Sheet4.Range("B4:G1000"), 6, ",Support", myTxt)
+  Call ExtractOneRowData(Sheet5.Range("B2:G2"), ",SupportKeys", myTxt)
+  Call ExtractColumnsData(Sheet5.Range("B4:G1000"), 6, ",Support", myTxt)
 
   ' Extract the Vertical Tank Standard data
-  Call ExtractOneColumnData(Sheet5.Range("C3:C12"), ",Tank-Standard,verticalTank", myTxt)
+  Call ExtractOneColumnData(Sheet6.Range("C3:C12"), ",Tank-Standard,verticalTank", myTxt)
   ' Extract the Vertical Tank HeadStyle data
-  Call ExtractOneColumnData(Sheet5.Range("D15:D19"), ",Tank-HeadStyle,verticalTank", myTxt)
+  Call ExtractOneColumnData(Sheet6.Range("D15:D19"), ",Tank-HeadStyle,verticalTank", myTxt)
   ' Extract the Vertical Tank HeadMaterial data
-  Call ExtractOneColumnData(Sheet5.Range("D20:D24"), ",Tank-HeadMaterial,verticalTank", myTxt)
+  Call ExtractOneColumnData(Sheet6.Range("D20:D24"), ",Tank-HeadMaterial,verticalTank", myTxt)
   ' Extract the Vertical Tank Other Request data
-  Call ExtractOneColumnData(Sheet5.Range("C27:C40"), ",Tank-OtherRequest,verticalTank", myTxt)
+  Call ExtractOneColumnData(Sheet6.Range("C27:C40"), ",Tank-OtherRequest,verticalTank", myTxt)
 
   ' Extract the Horizontal Tank Standard data
-  Call ExtractOneColumnData(Sheet6.Range("C3:C12"), ",Tank-Standard,horizontalTank", myTxt)
+  Call ExtractOneColumnData(Sheet7.Range("C3:C12"), ",Tank-Standard,horizontalTank", myTxt)
   ' Extract the Horizontal Tank HeadStyle data
-  Call ExtractOneColumnData(Sheet6.Range("D15:D19"), ",Tank-HeadStyle,horizontalTank", myTxt)
+  Call ExtractOneColumnData(Sheet7.Range("D15:D19"), ",Tank-HeadStyle,horizontalTank", myTxt)
   ' Extract the Horizontal Tank HeadMaterial data
-  Call ExtractOneColumnData(Sheet6.Range("D20:D24"), ",Tank-HeadMaterial,horizontalTank", myTxt)
+  Call ExtractOneColumnData(Sheet7.Range("D20:D24"), ",Tank-HeadMaterial,horizontalTank", myTxt)
   ' Extract the Horizontal Tank Other Request data
-  Call ExtractOneColumnData(Sheet6.Range("C27:C40"), ",Tank-OtherRequest,horizontalTank", myTxt)
+  Call ExtractOneColumnData(Sheet7.Range("C27:C40"), ",Tank-OtherRequest,horizontalTank", myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
