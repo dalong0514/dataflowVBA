@@ -10,10 +10,14 @@ Public Sub ExtractBsGCTDataToCSV()
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
   Call SetTankInspectRate(Sheet1.Range("R5:Z100"))
+
   ' Extract main data
-  ' the column in range can be wrong. eg [X100]
+  ' the column in range could be wrong, still ok. eg [X100]
   Call ExtractColumnsData(Sheet1.Range("B4:X100"), 33, ",Tank", myTxt)
   Call ExtractOneRowData(Sheet1.Range("B3:X3"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
+  ' because heat data need not to delete the first row, B5 not B4
+  Call ExtractColumnsData(Sheet2.Range("B5:X100"), 51, ",Heater", myTxt)
+  Call ExtractOneRowData(Sheet2.Range("B3:X3"), ",Heater-MainKeys,BSGCT_TYPE", myTxt)
 
   ' Extract the nozzle data
   Call ExtractOneRowData(Sheet3.Range("B2:H2"), ",NozzleKeys", myTxt)
@@ -21,7 +25,9 @@ Public Sub ExtractBsGCTDataToCSV()
 
   ' Extract the Tank PressureElement data
   Call ExtractOneRowData(Sheet4.Range("B3:F3"), ",Tank-PressureElementKeys", myTxt)
-  Call ExtractColumnsData(Sheet4.Range("B5:F10"), 5, ",Tank-PressureElement", myTxt)
+  Call ExtractColumnsData(Sheet4.Range("B5:F12"), 5, ",Tank-PressureElement", myTxt)
+  ' Extract the Heater PressureElement data
+  Call ExtractColumnsData(Sheet4.Range("B16:F29"), 5, ",Heater-PressureElement", myTxt)
 
   ' Extract the support data
   Call ExtractOneRowData(Sheet5.Range("B2:G2"), ",SupportKeys", myTxt)
@@ -44,6 +50,15 @@ Public Sub ExtractBsGCTDataToCSV()
   Call ExtractOneColumnData(Sheet7.Range("D20:D24"), ",Tank-HeadMaterial,horizontalTank", myTxt)
   ' Extract the Horizontal Tank Other Request data
   Call ExtractOneColumnData(Sheet7.Range("C27:C40"), ",Tank-OtherRequest,horizontalTank", myTxt)
+
+  ' Extract the Heater Standard data
+  Call ExtractOneColumnData(Sheet8.Range("C3:C12"), ",Heater-Standard,Heater", myTxt)
+  ' Extract the Heater HeadStyle data
+  Call ExtractOneColumnData(Sheet8.Range("D15:D19"), ",Heater-HeadStyle,Heater", myTxt)
+  ' Extract the Heater HeadMaterial data
+  Call ExtractOneColumnData(Sheet8.Range("D20:D24"), ",Heater-HeadMaterial,Heater", myTxt)
+  ' Extract the Heater Other Request data
+  Call ExtractOneColumnData(Sheet8.Range("C27:C40"), ",Heater-OtherRequest,Heater", myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
