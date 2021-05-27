@@ -16,7 +16,7 @@ Public Sub ExtractBsGCTDataToCSV()
   Call ExtractColumnsData(Sheet1.Range("B4:X100"), 33, ",Tank", myTxt)
   Call ExtractOneRowData(Sheet1.Range("B3:X3"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
   ' because heat data need not to delete the first row, B5 not B4
-  Call ExtractColumnsData(Sheet2.Range("B5:X100"), 51, ",Heater", myTxt)
+  Call ExtractColumnsData(Sheet2.Range("B5:X100"), 52, ",Heater", myTxt)
   Call ExtractOneRowData(Sheet2.Range("B3:X3"), ",Heater-MainKeys,BSGCT_TYPE", myTxt)
 
   ' Extract the nozzle data
