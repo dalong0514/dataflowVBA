@@ -5,7 +5,7 @@ Public Sub ExtractNsCleanAirAllDataToCSV()
   MsgBox "Extract Sucess!"
 End Sub
 
-Public Sub ExtractNsCleanAirProjectDataToCSV()
+Sub ExtractNsCleanAirProjectDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
   Dim MyFName As String
@@ -23,7 +23,7 @@ Public Sub ExtractNsCleanAirProjectDataToCSV()
   Set fso = Nothing
 End Sub
 
-Public Sub ExtractNsCleanAirSupplyDataToCSV()
+Sub ExtractNsCleanAirSupplyDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
   Dim MyFName As String
