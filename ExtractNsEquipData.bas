@@ -26,19 +26,66 @@ Public Sub ExtractNsEquipDataV1()
   MsgBox "Extract Sucess!"
 End Sub
 
-' refactored at 2021-04-25
-Public Sub ExtractNsEquipData()
+
+
+' refactored at 2021-05-31
+Public Sub ExtractNsEquipData1()
+  Call ExtractNsEquipData(Sheet1)
+End Sub
+
+' refactored at 2021-05-31
+Public Sub ExtractNsEquipData2()
+  Call ExtractNsEquipData(Sheet2)
+End Sub
+
+' refactored at 2021-05-31
+Public Sub ExtractNsEquipData3()
+  Call ExtractNsEquipData(Sheet3)
+End Sub
+
+' refactored at 2021-05-31
+Public Sub ExtractNsEquipData4()
+  Call ExtractNsEquipData(Sheet4)
+End Sub
+
+' refactored at 2021-05-31
+Public Sub ExtractNsEquipData5()
+  Call ExtractNsEquipData(Sheet5)
+End Sub
+
+' refactored at 2021-05-31
+Public Sub ExtractNsEquipData6()
+  Call ExtractNsEquipData(Sheet6)
+End Sub
+
+' refactored at 2021-05-31
+Public Sub ExtractNsEquipData7()
+  Call ExtractNsEquipData(Sheet7)
+End Sub
+
+' refactored at 2021-05-31
+Public Sub ExtractNsEquipData8()
+  Call ExtractNsEquipData(Sheet8)
+End Sub
+
+' refactored at 2021-05-31
+Public Sub ExtractNsEquipData9()
+  Call ExtractNsEquipData(Sheet9)
+End Sub
+
+' refactored at 2021-05-31
+Public Sub ExtractNsEquipData(Sheet)
   Dim MyFName As String
   Dim fso As Object
   Dim myTxt As Object
   
-  MyFName = "D:\dataflowcad\nsdata\tempEquip2.csv"
+  MyFName = "D:\dataflowcad\nsdata\tempEquip.csv"
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
   ' Extract the data for special Range
   ' the frist row will be abandoned in autoLisp
-  Call ExtractRangeData(Sheet1.Range("Q6:AR150"), 500, 28, myTxt)
+  Call ExtractRangeData(Sheet.Range("Q6:AR150"), 500, 28, myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
