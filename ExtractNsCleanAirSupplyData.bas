@@ -1,4 +1,28 @@
 ' 2021-05-31
+Public Sub ExtractNsCleanAirAllDataToCSV()
+  Call ExtractNsCleanAirProjectDataToCSV()
+  Call ExtractNsCleanAirSupplyDataToCSV()
+  MsgBox "Extract Sucess!"
+End Sub
+
+Public Sub ExtractNsCleanAirProjectDataToCSV()
+  Dim fso As Object
+  Dim myTxt As Object
+  Dim MyFName As String
+  
+  MyFName = "D:\dataflowcad\tempdata\nsCleanAirProjectInfo.txt"
+  
+  Set fso = CreateObject("Scripting.FileSystemObject")
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
+
+  myTxt.Write range("C2").Value + "," + range("E2").Value
+  myTxt.Write vbCr
+
+  myTxt.Close
+  Set myTxt = Nothing
+  Set fso = Nothing
+End Sub
+
 Public Sub ExtractNsCleanAirSupplyDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
@@ -9,7 +33,6 @@ Public Sub ExtractNsCleanAirSupplyDataToCSV()
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
-  Call ExtractProjectData(myTxt)
   Call ExtractOneRowData(Sheet1.Range("B3:F3"), myTxt)
   ' the column in range could be wrong, still ok. eg [X100]
   Call ExtractColumnsData(Sheet1.Range("B5:F200"), 5, myTxt)
@@ -42,10 +65,5 @@ Sub ExtractOneRowData(range, myTxt)
     myTxt.Write range.Cells(1, column).Value
     column = column + 1
   Loop
-  myTxt.Write vbCr
-End Sub
-
-Sub ExtractProjectData(myTxt)
-  myTxt.Write range("C2").Value + "," + range("E2").Value
   myTxt.Write vbCr
 End Sub
