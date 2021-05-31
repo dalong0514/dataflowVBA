@@ -9,9 +9,9 @@ Public Sub ExtractNsCleanAirSupplyDataToCSV()
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
-  ' Extract data
+  Call ExtractOneRowData(Sheet1.Range("B2:F2"), myTxt)
   ' the column in range could be wrong, still ok. eg [X100]
-  Call ExtractColumnsData(Sheet1.Range("A2:E100"), 5, myTxt)
+  Call ExtractColumnsData(Sheet1.Range("B3:F200"), 5, myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
@@ -19,7 +19,7 @@ Public Sub ExtractNsCleanAirSupplyDataToCSV()
   MsgBox "Extract Sucess!"
 End Sub
 
-Sub ExtractColumnsData(range, columnNum, dataTypeString, myTxt)
+Sub ExtractColumnsData(range, columnNum, myTxt)
   Dim row As Integer, column As Integer
   row = 1
   column = 1
@@ -31,4 +31,15 @@ Sub ExtractColumnsData(range, columnNum, dataTypeString, myTxt)
     myTxt.Write vbCr
     row = row + 1
   Loop
+End Sub
+
+Sub ExtractOneRowData(range, myTxt)
+  Dim column As Integer
+  column = 1
+  Do While range.Cells(1, column).Value <> ""
+    myTxt.Write ","
+    myTxt.Write range.Cells(1, column).Value
+    column = column + 1
+  Loop
+  myTxt.Write vbCr
 End Sub
