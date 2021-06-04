@@ -9,7 +9,8 @@ Public Sub ExtractBsGCTDataToCSV()
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
-  Call SetTankInspectRate(Sheet1.Range("R5:Z100"))
+  Call SetTankInspectRate(Sheet1.Range("R5:AB100"), 9)
+  Call SetTankInspectRate(Sheet2.Range("AK5:AK100"), 7)
 
   ' Extract main data
   ' the column in range could be wrong, still ok. eg [X100]
@@ -105,7 +106,7 @@ Sub ExtractColumnsData(range, columnNum, dataTypeString, myTxt)
   Loop
 End Sub
 
-Sub SetTankInspectRate(range)
+Sub SetTankInspectRate(range, columnNum)
   Dim row As Integer
   row = 1
   ' weld_joint is the frist column of the range
@@ -113,20 +114,20 @@ Sub SetTankInspectRate(range)
     ' barrel inspect_rate is the 7th column of the range
     Select Case True
       Case (range.Cells(row, 1).Value like "0.85/*") 
-        range.Cells(row, 7).Value = "20%"
+        range.Cells(row, columnNum).Value = "20%"
       Case (range.Cells(row, 1).Value like "1.0/*") 
-        range.Cells(row, 7).Value = "100%"
+        range.Cells(row, columnNum).Value = "100%"
       Case else 
-        range.Cells(row, 7).Value = "/"
+        range.Cells(row, columnNum).Value = "/"
     End Select
     ' head inspect_rate is the 7th column of the range
     Select Case True
       Case (range.Cells(row, 1).Value like "*/0.85") 
-        range.Cells(row, 8).Value = "20%"
+        range.Cells(row, columnNum+1).Value = "20%"
       Case (range.Cells(row, 1).Value like "*/1.0") 
-        range.Cells(row, 8).Value = "100%"
+        range.Cells(row, columnNum+1).Value = "100%"
       Case else 
-        range.Cells(row, 8).Value = "/"
+        range.Cells(row, columnNum+1).Value = "/"
     End Select
     row = row + 1
   Loop
