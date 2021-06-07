@@ -1,0 +1,53 @@
+' 2021-06-07
+Public Sub ExtractNsCleanAirAllGlobalParamToCSV()
+  Call ExtractNsCleanAirGlobalProjectInfoToCSV()
+  Call ExtractNsCleanAirGlobalParamToCSV()
+  MsgBox "Extract Sucess!"
+End Sub
+
+Sub ExtractNsCleanAirGlobalProjectInfoToCSV()
+  Dim fso As Object
+  Dim myTxt As Object
+  Dim MyFName As String
+  
+  MyFName = "D:\dataflowcad\tempdata\nsCleanAirGlobalProjectInfo.txt"
+  
+  Set fso = CreateObject("Scripting.FileSystemObject")
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
+
+  myTxt.Write range("D2").Value
+  myTxt.Write vbCr
+
+  myTxt.Close
+  Set myTxt = Nothing
+  Set fso = Nothing
+End Sub
+
+Sub ExtractNsCleanAirGlobalParamToCSV()
+  Dim fso As Object
+  Dim myTxt As Object
+  Dim MyFName As String
+  
+  MyFName = "D:\dataflowcad\tempdata\nsCleanAirGlobalParam.csv"
+  
+  Set fso = CreateObject("Scripting.FileSystemObject")
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
+
+  Call ExtractOneColumnData(Sheet1.Range("B4:B100"), myTxt)
+  Call ExtractOneColumnData(Sheet1.Range("D4:D100"), myTxt)
+
+  myTxt.Close
+  Set myTxt = Nothing
+  Set fso = Nothing
+End Sub
+
+Sub ExtractOneColumnData(range, myTxt)
+  Dim row As Integer
+  row = 1
+  Do While range.Cells(row, 1).Value <> ""
+    myTxt.Write ","
+    myTxt.Write range.Cells(row, 1).Value
+    row = row + 1
+  Loop
+  myTxt.Write vbCr
+End Sub
