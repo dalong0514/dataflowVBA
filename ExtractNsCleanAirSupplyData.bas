@@ -33,9 +33,9 @@ Sub ExtractNsCleanAirSupplyDataToCSV()
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
-  Call ExtractOneRowData(Sheet1.Range("B3:G3"), myTxt)
+  Call ExtractOneRowData(Sheet1.Range("B3:AV3"), myTxt)
   ' the column in range could be wrong, still ok. eg [X100]
-  Call ExtractColumnsData(Sheet1.Range("B5:G200"), 6, myTxt)
+  Call ExtractColumnsData(Sheet1.Range("B5:AV300"), 47, myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
