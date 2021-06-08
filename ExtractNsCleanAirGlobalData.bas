@@ -15,7 +15,7 @@ Sub ExtractNsCleanAirGlobalProjectInfoToCSV()
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
-  myTxt.Write range("D2").Value
+  myTxt.Write range("E2").Value
   myTxt.Write vbCr
 
   myTxt.Close
@@ -34,7 +34,7 @@ Sub ExtractNsCleanAirGlobalParamToCSV()
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
   Call ExtractOneColumnData(Sheet1.Range("B4:B100"), myTxt)
-  Call ExtractOneColumnData(Sheet1.Range("D4:D100"), myTxt)
+  Call ExtractOneColumnData(Sheet1.Range("C4:C100"), myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
