@@ -1,4 +1,4 @@
-' 2021-06-07
+' 2021-06-08
 Public Sub ExtractNsCleanAirAllGlobalParamToCSV()
   Call ExtractNsCleanAirGlobalProjectInfoToCSV()
   Call ExtractNsCleanAirGlobalParamToCSV()
@@ -33,21 +33,23 @@ Sub ExtractNsCleanAirGlobalParamToCSV()
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
-  Call ExtractOneColumnData(Sheet1.Range("B4:B100"), myTxt)
-  Call ExtractOneColumnData(Sheet1.Range("C4:C100"), myTxt)
+  Call ExtractOneColumnData(Sheet1.Range("B4:B100"), myTxt, 150)
+  Call ExtractOneColumnData(Sheet1.Range("C4:C100"), myTxt, 150)
 
   myTxt.Close
   Set myTxt = Nothing
   Set fso = Nothing
 End Sub
 
-Sub ExtractOneColumnData(range, myTxt)
+Sub ExtractOneColumnData(range, myTxt, rowNum)
   Dim row As Integer
   row = 1
-  Do While range.Cells(row, 1).Value <> ""
-    myTxt.Write ","
-    myTxt.Write range.Cells(row, 1).Value
-    row = row + 1
-  Loop
+  For row = 1 To rowNum
+    ' Only extract the row that have the data
+    if range.Cells(row, 1).Value <> "" Then 
+      myTxt.Write ","
+      myTxt.Write range.Cells(row, 1).Value
+    End if
+  Next row
   myTxt.Write vbCr
 End Sub
