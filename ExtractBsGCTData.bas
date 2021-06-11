@@ -1,4 +1,4 @@
-' refactored at 2021-05-20
+' refactored at 2021-06-11
 Public Sub ExtractBsGCTDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
@@ -9,13 +9,13 @@ Public Sub ExtractBsGCTDataToCSV()
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
-  Call SetTankInspectRate(Sheet1.Range("R5:AB100"), 9)
-  Call SetTankInspectRate(Sheet2.Range("AK5:AK100"), 7)
+  Call SetTankInspectRate(Sheet1.Range("R7:AB150"), 9)
+  Call SetTankInspectRate(Sheet2.Range("AK5:AK150"), 7)
 
   ' Extract main data
   ' the column in range could be wrong, still ok. eg [X100]
-  Call ExtractColumnsData(Sheet1.Range("B4:X100"), 33, ",Tank", myTxt)
-  Call ExtractOneRowData(Sheet1.Range("B3:X3"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
+  Call ExtractColumnsData(Sheet1.Range("B6:X150"), 34, ",Tank", myTxt)
+  Call ExtractOneRowData(Sheet1.Range("B5:X5"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
   ' because heat data need not to delete the first row, B5 not B4
   Call ExtractColumnsData(Sheet2.Range("B5:X100"), 52, ",Heater", myTxt)
   Call ExtractOneRowData(Sheet2.Range("B3:X3"), ",Heater-MainKeys,BSGCT_TYPE", myTxt)
