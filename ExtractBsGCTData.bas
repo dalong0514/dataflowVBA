@@ -1,5 +1,45 @@
 ' refactored at 2021-06-11
-Public Sub ExtractBsGCTDataToCSV()
+Public Sub ExtractAllBsGCTData()
+  Dim tankFileName As String
+  Dim heaterFileName As String
+  tankFileName = "D:\dataflowcad\bsdata\bsGCTTankMainData.txt"
+  tankFileName = "D:\dataflowcad\bsdata\bsGCTHeaterMainData.txt"
+
+  Call ExtractBsGCTOtherDataToCSV()
+  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B6:X150"), 34)
+  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X150"), 52)
+  ' Call ExtractBsGCTTankDataToCSV()
+  ' Call ExtractBsGCTHeaterDataToCSV()
+End Sub
+
+' refactored at 2021-06-11
+Public Sub ExtractBsGCTDataToCSV(gctFileName, range, columnNum)
+  Dim fso As Object
+  Dim myTxt As Object
+  Set fso = CreateObject("Scripting.FileSystemObject")
+  Set myTxt = fso.CreateTextFile(Filename:=gctFileName, OverWrite:=True)
+  Call ExtractRangeData(range, columnNum, myTxt)
+  myTxt.Close
+  Set myTxt = Nothing
+  Set fso = Nothing
+End Sub
+
+Sub ExtractRangeData(range, columnNum, myTxt)
+  Dim row As Integer, column As Integer
+  row = 1
+  column = 1
+  Do While range.Cells(row, 1).Value <> ""
+    For column = 1 To columnNum
+      myTxt.Write ","
+      myTxt.Write range.Cells(row, column).Value
+    Next column
+    myTxt.Write vbCr
+    row = row + 1
+  Loop
+End Sub
+
+' refactored at 2021-06-11
+Public Sub ExtractBsGCTOtherDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
   Dim MyFName As String
@@ -9,16 +49,8 @@ Public Sub ExtractBsGCTDataToCSV()
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
-  Call SetTankInspectRate(Sheet1.Range("R7:AB150"), 9)
-  Call SetTankInspectRate(Sheet2.Range("AK5:AK150"), 7)
-
-  ' Extract main data
-  ' the column in range could be wrong, still ok. eg [X100]
-  Call ExtractColumnsData(Sheet1.Range("B6:X150"), 34, ",Tank", myTxt)
-  Call ExtractOneRowData(Sheet1.Range("B5:X5"), ",Tank-MainKeys,BSGCT_TYPE", myTxt)
-  ' because heat data need not to delete the first row, B5 not B4
-  Call ExtractColumnsData(Sheet2.Range("B5:X100"), 52, ",Heater", myTxt)
-  Call ExtractOneRowData(Sheet2.Range("B3:X3"), ",Heater-MainKeys,BSGCT_TYPE", myTxt)
+  ' Call SetTankInspectRate(Sheet1.Range("R7:AB150"), 9)
+  ' Call SetTankInspectRate(Sheet2.Range("AK5:AK150"), 7)
 
   ' Extract the nozzle data
   Call ExtractOneRowData(Sheet3.Range("B2:H2"), ",NozzleKeys", myTxt)
