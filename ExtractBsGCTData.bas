@@ -2,40 +2,43 @@
 Public Sub ExtractAllBsGCTData()
   Dim tankFileName As String
   Dim heaterFileName As String
+  Dim projectFileName As String
   tankFileName = "D:\dataflowcad\bsdata\bsGCTTankMainData.txt"
-  tankFileName = "D:\dataflowcad\bsdata\bsGCTHeaterMainData.txt"
+  heaterFileName = "D:\dataflowcad\bsdata\bsGCTHeaterMainData.txt"
+  projectFileName = "D:\dataflowcad\bsdata\bsGCTProjectData.txt"
 
   Call ExtractBsGCTOtherDataToCSV()
-  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B6:X150"), 34)
-  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X150"), 52)
-  ' Call ExtractBsGCTTankDataToCSV()
-  ' Call ExtractBsGCTHeaterDataToCSV()
+  Call ExtractBsGCTDataToCSV(projectFileName, Sheet1.Range("C4:K5"), 2, 8)
+  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B8:X150"), 150, 35)
+  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X150"), 150, 53)
 End Sub
 
 ' refactored at 2021-06-11
-Public Sub ExtractBsGCTDataToCSV(gctFileName, range, columnNum)
+Public Sub ExtractBsGCTDataToCSV(gctFileName, range, rowNum, columnNum)
   Dim fso As Object
   Dim myTxt As Object
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=gctFileName, OverWrite:=True)
-  Call ExtractRangeData(range, columnNum, myTxt)
+  Call ExtractRangeNoNullData(range, rowNum, columnNum, myTxt)
   myTxt.Close
   Set myTxt = Nothing
   Set fso = Nothing
 End Sub
 
-Sub ExtractRangeData(range, columnNum, myTxt)
+Sub ExtractRangeNoNullData(range, rowNum, columnNum, myTxt)
   Dim row As Integer, column As Integer
   row = 1
   column = 1
-  Do While range.Cells(row, 1).Value <> ""
-    For column = 1 To columnNum
-      myTxt.Write ","
-      myTxt.Write range.Cells(row, column).Value
-    Next column
-    myTxt.Write vbCr
-    row = row + 1
-  Loop
+  For row = 1 To rowNum
+    ' Only extract the row that have the data
+    if range.Cells(row, 1).Value <> "" Then 
+      For column = 1 To columnNum
+        myTxt.Write ","
+        myTxt.Write range.Cells(row, column).Value
+      Next column
+      myTxt.Write vbCr
+    End if
+  Next row
 End Sub
 
 ' refactored at 2021-06-11
