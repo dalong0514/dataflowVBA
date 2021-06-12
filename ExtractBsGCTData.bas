@@ -1,4 +1,4 @@
-' refactored at 2021-06-11
+' refactored at 2021-06-12
 Public Sub ExtractAllBsGCTData()
   Dim tankFileName As String
   Dim heaterFileName As String
@@ -10,9 +10,9 @@ Public Sub ExtractAllBsGCTData()
   nozzleFileName = "D:\dataflowcad\bsdata\bsGCTNozzleData.txt"
 
   Call ExtractBsGCTOtherDataToCSV()
-  Call ExtractBsGCTDataToCSV(projectFileName, Sheet1.Range("C4:K5"), 2, 8)
-  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B8:X150"), 150, 35)
-  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X150"), 150, 53)
+  Call ExtractBsGCTDataToCSV(projectFileName, Sheet1.Range("D4:K5"), 2, 8)
+  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B8:X150"), 150, 36)
+  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X150"), 150, 54)
   Call ExtractBsGCTDataToCSV(nozzleFileName, Sheet3.Range("B4:J150"), 2000, 9)
 End Sub
 
