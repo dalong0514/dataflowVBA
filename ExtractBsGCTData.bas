@@ -55,9 +55,6 @@ Public Sub ExtractBsGCTOtherDataToCSV()
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
-  ' Call SetTankInspectRate(Sheet1.Range("R7:AB150"), 9)
-  ' Call SetTankInspectRate(Sheet2.Range("AK5:AK150"), 7)
-
   ' Extract the Tank PressureElement data
   Call ExtractOneRowData(Sheet4.Range("B3:F3"), ",Tank-PressureElementKeys", myTxt)
   Call ExtractColumnsData(Sheet4.Range("B5:F12"), 5, ",Tank-PressureElement", myTxt)
@@ -140,6 +137,10 @@ Sub ExtractColumnsData(range, columnNum, dataTypeString, myTxt)
   Loop
 End Sub
 
+
+
+
+' Abandoned at 2021-06-13
 Sub SetTankInspectRate(range, columnNum)
   Dim row As Integer
   row = 1
