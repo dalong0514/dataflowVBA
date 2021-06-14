@@ -4,16 +4,21 @@ Public Sub ExtractAllBsGCTData()
   Dim heaterFileName As String
   Dim projectFileName As String
   Dim nozzleFileName As String
+  Dim supportData As String
+
   tankFileName = "D:\dataflowcad\bsdata\bsGCTTankMainData.txt"
   heaterFileName = "D:\dataflowcad\bsdata\bsGCTHeaterMainData.txt"
   projectFileName = "D:\dataflowcad\bsdata\bsGCTProjectData.txt"
   nozzleFileName = "D:\dataflowcad\bsdata\bsGCTNozzleData.txt"
+  supportFileName = "D:\dataflowcad\bsdata\bsGCTSupportData.txt"
 
   Call ExtractBsGCTOtherDataToCSV()
   Call ExtractBsGCTDataToCSV(projectFileName, Sheet1.Range("D4:K5"), 2, 8)
-  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B8:X150"), 150, 36)
-  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X150"), 150, 54)
-  Call ExtractBsGCTDataToCSV(nozzleFileName, Sheet3.Range("B4:J150"), 2000, 9)
+  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B8:X2000"), 200, 36)
+  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X200"), 200, 54)
+  Call ExtractBsGCTDataToCSV(nozzleFileName, Sheet3.Range("B4:J2000"), 2000, 9)
+  Call ExtractBsGCTDataToCSV(supportFileName, Sheet5.Range("B4:G1000"), 1000, 6)
+
 End Sub
 
 ' refactored at 2021-06-11
@@ -60,10 +65,6 @@ Public Sub ExtractBsGCTOtherDataToCSV()
   Call ExtractColumnsData(Sheet4.Range("B5:F12"), 5, ",Tank-PressureElement", myTxt)
   ' Extract the Heater PressureElement data
   Call ExtractColumnsData(Sheet4.Range("B16:F29"), 5, ",Heater-PressureElement", myTxt)
-
-  ' Extract the support data
-  Call ExtractOneRowData(Sheet5.Range("B2:G2"), ",SupportKeys", myTxt)
-  Call ExtractColumnsData(Sheet5.Range("B4:G1000"), 6, ",Support", myTxt)
 
   ' Extract the Vertical Tank Standard data
   Call ExtractOneColumnData(Sheet6.Range("C3:C12"), ",Tank-Standard,verticalTank", myTxt)
@@ -136,6 +137,13 @@ Sub ExtractColumnsData(range, columnNum, dataTypeString, myTxt)
     row = row + 1
   Loop
 End Sub
+
+
+
+
+
+
+
 
 
 
