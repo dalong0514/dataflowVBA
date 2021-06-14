@@ -5,12 +5,14 @@ Public Sub ExtractAllBsGCTData()
   Dim projectFileName As String
   Dim nozzleFileName As String
   Dim supportData As String
+  Dim reactorFileName As String
 
   tankFileName = "D:\dataflowcad\bsdata\bsGCTTankMainData.txt"
   heaterFileName = "D:\dataflowcad\bsdata\bsGCTHeaterMainData.txt"
   projectFileName = "D:\dataflowcad\bsdata\bsGCTProjectData.txt"
   nozzleFileName = "D:\dataflowcad\bsdata\bsGCTNozzleData.txt"
   supportFileName = "D:\dataflowcad\bsdata\bsGCTSupportData.txt"
+  reactorFileName = "D:\dataflowcad\bsdata\bsGCTReactorMainData.txt"
 
   Call ExtractBsGCTOtherDataToCSV()
   Call ExtractBsGCTDataToCSV(projectFileName, Sheet1.Range("D4:K5"), 2, 8)
@@ -18,11 +20,12 @@ Public Sub ExtractAllBsGCTData()
   Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X200"), 200, 54)
   Call ExtractBsGCTDataToCSV(nozzleFileName, Sheet3.Range("B4:J2000"), 2000, 9)
   Call ExtractBsGCTDataToCSV(supportFileName, Sheet5.Range("B4:G1000"), 1000, 6)
+  Call ExtractBsGCTDataToCSV(reactorFileName, Sheet9.Range("B4:X200"), 200, 52)
 
 End Sub
 
 ' refactored at 2021-06-11
-Public Sub ExtractBsGCTDataToCSV(gctFileName, range, rowNum, columnNum)
+Sub ExtractBsGCTDataToCSV(gctFileName, range, rowNum, columnNum)
   Dim fso As Object
   Dim myTxt As Object
   Set fso = CreateObject("Scripting.FileSystemObject")
@@ -50,7 +53,7 @@ Sub ExtractRangeNoNullData(range, rowNum, columnNum, myTxt)
 End Sub
 
 ' refactored at 2021-06-11
-Public Sub ExtractBsGCTOtherDataToCSV()
+Sub ExtractBsGCTOtherDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
   Dim MyFName As String
