@@ -1,4 +1,4 @@
-' refactored at 2021-06-12
+' refactored at 2021-06-15
 Public Sub ExtractAllBsGCTData()
   Dim tankFileName As String
   Dim heaterFileName As String
@@ -6,6 +6,10 @@ Public Sub ExtractAllBsGCTData()
   Dim nozzleFileName As String
   Dim supportData As String
   Dim reactorFileName As String
+  Dim pressureElementFileName As String
+  Dim standardFileName As String
+  Dim requirementFileName As String
+  Dim otherRequestFileName As String
 
   tankFileName = "D:\dataflowcad\bsdata\bsGCTTankMainData.txt"
   heaterFileName = "D:\dataflowcad\bsdata\bsGCTHeaterMainData.txt"
@@ -13,14 +17,23 @@ Public Sub ExtractAllBsGCTData()
   nozzleFileName = "D:\dataflowcad\bsdata\bsGCTNozzleData.txt"
   supportFileName = "D:\dataflowcad\bsdata\bsGCTSupportData.txt"
   reactorFileName = "D:\dataflowcad\bsdata\bsGCTReactorMainData.txt"
+  pressureElementFileName = "D:\dataflowcad\bsdata\bsGCTPressureElementData.txt"
+  standardFileName = "D:\dataflowcad\bsdata\bsGCTStandardData.txt"
+  requirementFileName = "D:\dataflowcad\bsdata\bsGCTRequirementData.txt"
+  otherRequestFileName = "D:\dataflowcad\bsdata\bsGCTOtherRequestData.txt"
 
-  Call ExtractBsGCTOtherDataToCSV()
   Call ExtractBsGCTDataToCSV(projectFileName, Sheet1.Range("D4:K5"), 2, 8)
-  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B8:X2000"), 200, 36)
-  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X200"), 200, 54)
+  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B8:X2000"), 200, 40)
+  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X200"), 200, 58)
   Call ExtractBsGCTDataToCSV(nozzleFileName, Sheet3.Range("B4:J2000"), 2000, 9)
   Call ExtractBsGCTDataToCSV(supportFileName, Sheet5.Range("B4:G1000"), 1000, 6)
-  Call ExtractBsGCTDataToCSV(reactorFileName, Sheet9.Range("B4:X200"), 200, 52)
+  Call ExtractBsGCTDataToCSV(reactorFileName, Sheet9.Range("B4:X200"), 200, 57)
+  Call ExtractBsGCTDataToCSV(pressureElementFileName, Sheet4.Range("B4:H500"), 500, 7)
+  Call ExtractBsGCTDataToCSV(standardFileName, Sheet6.Range("B4:D500"), 500, 3)
+  Call ExtractBsGCTDataToCSV(requirementFileName, Sheet7.Range("B4:E500"), 500, 4)
+  Call ExtractBsGCTDataToCSV(otherRequestFileName, Sheet8.Range("B4:D500"), 500, 3)
+
+  MsgBox "Extract Sucess!"
 
 End Sub
 
@@ -99,7 +112,6 @@ Sub ExtractBsGCTOtherDataToCSV()
   myTxt.Close
   Set myTxt = Nothing
   Set fso = Nothing
-  MsgBox "Extract Sucess!"
 End Sub
 
 Sub ExtractOneColumnData(range, dataTypeString, myTxt)
@@ -137,44 +149,6 @@ Sub ExtractColumnsData(range, columnNum, dataTypeString, myTxt)
       myTxt.Write range.Cells(row, column).Value
     Next column
     myTxt.Write vbCr
-    row = row + 1
-  Loop
-End Sub
-
-
-
-
-
-
-
-
-
-
-
-' Abandoned at 2021-06-13
-Sub SetTankInspectRate(range, columnNum)
-  Dim row As Integer
-  row = 1
-  ' weld_joint is the frist column of the range
-  Do While range.Cells(row, 1).Value <> ""
-    ' barrel inspect_rate is the 7th column of the range
-    Select Case True
-      Case (range.Cells(row, 1).Value like "0.85/*") 
-        range.Cells(row, columnNum).Value = "20%"
-      Case (range.Cells(row, 1).Value like "1.0/*") 
-        range.Cells(row, columnNum).Value = "100%"
-      Case else 
-        range.Cells(row, columnNum).Value = "/"
-    End Select
-    ' head inspect_rate is the 7th column of the range
-    Select Case True
-      Case (range.Cells(row, 1).Value like "*/0.85") 
-        range.Cells(row, columnNum+1).Value = "20%"
-      Case (range.Cells(row, 1).Value like "*/1.0") 
-        range.Cells(row, columnNum+1).Value = "100%"
-      Case else 
-        range.Cells(row, columnNum+1).Value = "/"
-    End Select
     row = row + 1
   Loop
 End Sub
