@@ -6,9 +6,11 @@ Sub ExtractToxicitySubtanceData()
   MyFName = "D:\dataflowcad\tempdata\gsToxicitySubstance.txt"
   
   Set fso = CreateObject("Scripting.FileSystemObject")
-  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True, Unicode:=True)
 
-  Call ExtractOneColumnData(Sheet1.Range("B2:B500"), myTxt, 500)
+  myTxt.Write "#" + range("B2").Value
+  myTxt.Write vbCr
+  Call ExtractOneColumnData(Sheet1.range("B4:B500"), myTxt, 500)
 
   myTxt.Close
   Set myTxt = Nothing
@@ -22,9 +24,9 @@ Sub ExtractOneColumnData(range, myTxt, rowNum)
   row = 1
   For row = 1 To rowNum
     ' Only extract the row that have the data
-    if range.Cells(row, 1).Value <> "" Then 
+    If range.Cells(row, 1).Value <> "" Then
       myTxt.Write "#"
       myTxt.Write range.Cells(row, 1).Value
-    End if
+    End If
   Next row
 End Sub
