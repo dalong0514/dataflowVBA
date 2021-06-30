@@ -13,7 +13,7 @@ Sub ExtractNsCleanAirGlobalProjectInfoToCSV()
   MyFName = "D:\dataflowcad\tempdata\nsCleanAirGlobalProjectInfo.txt"
   
   Set fso = CreateObject("Scripting.FileSystemObject")
-  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True, Unicode:=True))
 
   myTxt.Write range("E2").Value
   myTxt.Write vbCr
@@ -31,7 +31,7 @@ Sub ExtractNsCleanAirGlobalParamToCSV()
   MyFName = "D:\dataflowcad\tempdata\nsCleanAirGlobalParam.csv"
   
   Set fso = CreateObject("Scripting.FileSystemObject")
-  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True, Unicode:=True))
 
   Call ExtractOneColumnData(Sheet1.Range("B4:B500"), myTxt, 500)
   myTxt.Write vbCr

@@ -74,7 +74,7 @@ Sub ExtractBsGCTOtherDataToCSV()
   MyFName = "D:\dataflowcad\bsdata\bsGCT.csv"
   
   Set fso = CreateObject("Scripting.FileSystemObject")
-  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True, Unicode:=True))
 
   ' Extract the Tank PressureElement data
   Call ExtractOneRowData(Sheet4.Range("B3:F3"), ",Tank-PressureElementKeys", myTxt)
