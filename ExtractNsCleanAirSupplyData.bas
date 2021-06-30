@@ -13,7 +13,7 @@ Sub ExtractNsCleanAirProjectDataToCSV()
   MyFName = "D:\dataflowcad\tempdata\nsCleanAirProjectInfo.txt"
   
   Set fso = CreateObject("Scripting.FileSystemObject")
-  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True, Unicode:=True))
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
   myTxt.Write range("C2").Value + "," + range("F2").Value
   myTxt.Write vbCr
@@ -31,7 +31,7 @@ Sub ExtractNsCleanAirSupplyDataToCSV()
   MyFName = "D:\dataflowcad\tempdata\nsCleanAirSupply.csv"
   
   Set fso = CreateObject("Scripting.FileSystemObject")
-  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True, Unicode:=True))
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
   Call ExtractOneRowData(Sheet1.Range("B3:AV3"), myTxt)
   ' the column in range could be wrong, still ok. eg [X100]

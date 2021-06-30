@@ -6,7 +6,7 @@ Sub ExtractToxicitySubtanceData()
   MyFName = "D:\dataflowcad\tempdata\gsToxicitySubstance.txt"
   
   Set fso = CreateObject("Scripting.FileSystemObject")
-  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True, Unicode:=True), Unicode:=True)
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
   myTxt.Write "#" + range("B2").Value
   myTxt.Write vbCr

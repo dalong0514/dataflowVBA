@@ -51,7 +51,7 @@ Public Sub ExtractNsEquipData(Sheet)
   
   MyFName = "D:\dataflowcad\nsdata\tempEquip.csv"
   Set fso = CreateObject("Scripting.FileSystemObject")
-  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True, Unicode:=True))
+  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
   ' Extract the data for special Range
   ' the frist row will be abandoned in autoLisp
