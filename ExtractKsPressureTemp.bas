@@ -10,7 +10,8 @@ Sub ExtractKsPressureSupplyDataToCSV()
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
   ' the column in range could be wrong, still ok. eg [X100]
-  Call ExtractRangeDataToJsonString(Sheet1.range("B1:AI1"), Sheet1.range("B3:AI500"), 1000, 34, myTxt)
+  Call ExtractRangeDataToJsonString(Sheet1.range("B3:C3"), Sheet1.range("B4:C4"), 1, 2, myTxt)
+  Call ExtractRangeDataToJsonString(Sheet1.range("B6:AG6"), Sheet1.range("B8:AG500"), 1000, 32, myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
