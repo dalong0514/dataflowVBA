@@ -10,30 +10,14 @@ Sub ExtractKsPressureSupplyDataToCSV()
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
   ' the column in range could be wrong, still ok. eg [X100]
-  Call ExtractRangeDataToJsonString(Sheet1.range("B3:C3"), Sheet1.range("B4:C4"), 1, 2, myTxt)
-  Call ExtractRangeDataToJsonString(Sheet1.range("B6:AG6"), Sheet1.range("B8:AG500"), 1000, 32, myTxt)
+  Call ExtractProjectInfoToJsonString(myTxt)
+  Call ExtractRangeDataToJsonString(Sheet1.range("B5:AG5"), Sheet1.range("B7:AG500"), 1000, 32, myTxt)
 
   myTxt.Close
   Set myTxt = Nothing
   Set fso = Nothing
 
   MsgBox "Extract Sucess!"
-End Sub
-
-Sub ExtractRangeData(range, rowNum, columnNum, myTxt)
-  Dim row As Integer, column As Integer
-  row = 1
-  column = 1
-  For row = 1 To rowNum
-    ' Only extract the row that have the data
-    if range.Cells(row, 1).Value <> "" Then 
-      For column = 1 To columnNum
-        myTxt.Write ","
-        myTxt.Write range.Cells(row, column).Value
-      Next column
-      myTxt.Write vbCr
-    End if
-  Next row
 End Sub
 
 Sub ExtractRangeDataToJsonString(keyRange, valueRange, rowNum, columnNum, myTxt)
@@ -69,3 +53,12 @@ Function ExtractOneRowDataToArray(range)
   arr = Split(csvString, ",")
   ExtractOneRowDataToArray = arr
 End Function
+
+Sub ExtractProjectInfoToJsonString(myTxt)
+  Dim jsonString As String
+  myTxt.Write "{"
+  jsonString = chr(34) & Sheet1.range("B3") & chr(34) & ":" & chr(34) & Sheet1.range("C2") & chr(34) & "," & chr(34) & Sheet1.range("C3") & chr(34) & ":" & chr(34) & Sheet1.range("E2") & chr(34)
+  myTxt.Write jsonString
+  myTxt.Write "}"
+  myTxt.Write vbCr
+End Sub
