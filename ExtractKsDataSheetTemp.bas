@@ -1,10 +1,11 @@
 ' 2021-07-04
+' refactored at 2021-07-12
 Sub ExtractKsPressureSupplyDataToCSV()
   Dim fso As Object
   Dim myTxt As Object
   Dim MyFName As String
   
-  MyFName = "D:\dataflowcad\tempdata\ksPressureSupply.json"
+  MyFName = "D:\dataflowcad\tempdata\ksDataSheetTemp.json"
   
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
@@ -57,8 +58,14 @@ End Function
 Sub ExtractProjectInfoToJsonString(myTxt)
   Dim jsonString As String
   myTxt.Write "{"
-  jsonString = chr(34) & Sheet1.range("B3") & chr(34) & ":" & chr(34) & Sheet1.range("C2") & chr(34) & "," & chr(34) & Sheet1.range("C3") & chr(34) & ":" & chr(34) & Sheet1.range("E2") & chr(34)
+  jsonString = chr(34) & Sheet1.range("B3") & chr(34) & ":" & chr(34) & Sheet1.range("C2") & chr(34) & "," & chr(34) & Sheet1.range("C3") & chr(34) & ":" & chr(34) & Sheet1.range("E2") & chr(34) & "," & ConvertString("dataClass") & ":" & ConvertString("pressure")
   myTxt.Write jsonString
   myTxt.Write "}"
   myTxt.Write vbCr
 End Sub
+
+Function ConvertString(cellString)
+  Dim resultString As String
+  resultString = chr(34) & cellString & chr(34)
+  ConvertString = resultString
+End Function
