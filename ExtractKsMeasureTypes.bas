@@ -1,5 +1,6 @@
 ' 2021-07-12
-Sub ExtractKsMeasureTypesPressure()
+' refactored at 2021-07-13
+Sub ExtractKsMeasureTypes()
   Dim fso As Object
   Dim myTxt As Object
   Dim MyFName As String
