@@ -11,7 +11,7 @@ Sub ExtractKsMeasureTypesPressure()
 
   ' the column in range could be wrong, still ok. eg [X100]
   Call ExtractProjectInfoToJsonString(myTxt)
-  Call ExtractRangeDataToJsonString(Sheet1.range("C4:U4"), Sheet1.range("C6:U50"), 50, 19, myTxt)
+  Call ExtractRangeDataToJsonStringByKsType(Sheet1.range("C4:U4"), Sheet1.range("C6:U50"), 50, 19, myTxt, "pressure")
 
   myTxt.Close
   Set myTxt = Nothing
@@ -20,7 +20,7 @@ Sub ExtractKsMeasureTypesPressure()
   MsgBox "Extract Sucess!"
 End Sub
 
-Sub ExtractRangeDataToJsonString(keyRange, valueRange, rowNum, columnNum, myTxt)
+Sub ExtractRangeDataToJsonStringByKsType(keyRange, valueRange, rowNum, columnNum, myTxt, ksType)
   Dim row As Integer, column As Integer, jsonString As String, cellString As String, arr As Variant
   arr = ExtractOneRowDataToArray(keyRange)
   row = 1
@@ -29,10 +29,12 @@ Sub ExtractRangeDataToJsonString(keyRange, valueRange, rowNum, columnNum, myTxt)
     ' Only extract the row that have the data
     if valueRange.Cells(row, 1).Value <> "" Then 
       myTxt.Write "{"
-      jsonString = ""
+      jsonString = ConvertString("dataClass") & ":" & ConvertString(ksType) & ","
       For column = 1 To columnNum
         cellString = Replace(valueRange.Cells(row, column).Value, ",", "，")
-        jsonString = jsonString & chr(34) & arr(column-1) & chr(34) & ":" & chr(34) & cellString & chr(34) & ","
+        ' the cell content may have ", convert it to #, reconvert it before insert the database 2021-07-13
+        cellString = Replace(cellString, """", "#")
+        jsonString = jsonString & ConvertString(arr(column-1)) & ":" & ConvertString(cellString) & ","
       Next column
       jsonString = Left(jsonString, Len(jsonString)-1)
       myTxt.Write jsonString
