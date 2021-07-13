@@ -33,6 +33,9 @@ Sub ExtractRangeDataToJsonString(keyRange, valueRange, rowNum, columnNum, myTxt)
       jsonString = ""
       For column = 1 To columnNum
         cellString = Replace(valueRange.Cells(row, column).Value, ",", "，")
+        ' the cell content may have ", convert it to #, reconvert it before insert the database 2021-07-13
+        cellString = Replace(cellString, """", "#")
+        cellString = Replace(cellString, ":", "：")
         jsonString = jsonString & chr(34) & arr(column-1) & chr(34) & ":" & chr(34) & cellString & chr(34) & ","
       Next column
       jsonString = Left(jsonString, Len(jsonString)-1)

@@ -35,6 +35,7 @@ Sub ExtractRangeDataToJsonStringByKsType(keyRange, valueRange, rowNum, columnNum
         cellString = Replace(valueRange.Cells(row, column).Value, ",", "，")
         ' the cell content may have ", convert it to #, reconvert it before insert the database 2021-07-13
         cellString = Replace(cellString, """", "#")
+        cellString = Replace(cellString, ":", "：")
         jsonString = jsonString & ConvertString(arr(column-1)) & ":" & ConvertString(cellString) & ","
       Next column
       jsonString = Left(jsonString, Len(jsonString)-1)
