@@ -65,55 +65,6 @@ Sub ExtractRangeNoNullData(range, rowNum, columnNum, myTxt)
   Next row
 End Sub
 
-' refactored at 2021-06-11
-Sub ExtractBsGCTOtherDataToCSV()
-  Dim fso As Object
-  Dim myTxt As Object
-  Dim MyFName As String
-  
-  MyFName = "D:\dataflowcad\bsdata\bsGCT.csv"
-  
-  Set fso = CreateObject("Scripting.FileSystemObject")
-  Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
-
-  ' Extract the Tank PressureElement data
-  Call ExtractOneRowData(Sheet4.Range("B3:F3"), ",Tank-PressureElementKeys", myTxt)
-  Call ExtractColumnsData(Sheet4.Range("B5:F12"), 5, ",Tank-PressureElement", myTxt)
-  ' Extract the Heater PressureElement data
-  Call ExtractColumnsData(Sheet4.Range("B16:F29"), 5, ",Heater-PressureElement", myTxt)
-
-  ' Extract the Vertical Tank Standard data
-  Call ExtractOneColumnData(Sheet6.Range("C3:C12"), ",Tank-Standard,verticalTank", myTxt)
-  ' Extract the Vertical Tank HeadStyle data
-  Call ExtractOneColumnData(Sheet6.Range("D15:D19"), ",Tank-HeadStyle,verticalTank", myTxt)
-  ' Extract the Vertical Tank HeadMaterial data
-  Call ExtractOneColumnData(Sheet6.Range("D20:D24"), ",Tank-HeadMaterial,verticalTank", myTxt)
-  ' Extract the Vertical Tank Other Request data
-  Call ExtractOneColumnData(Sheet6.Range("C27:C40"), ",Tank-OtherRequest,verticalTank", myTxt)
-
-  ' Extract the Horizontal Tank Standard data
-  Call ExtractOneColumnData(Sheet7.Range("C3:C12"), ",Tank-Standard,horizontalTank", myTxt)
-  ' Extract the Horizontal Tank HeadStyle data
-  Call ExtractOneColumnData(Sheet7.Range("D15:D19"), ",Tank-HeadStyle,horizontalTank", myTxt)
-  ' Extract the Horizontal Tank HeadMaterial data
-  Call ExtractOneColumnData(Sheet7.Range("D20:D24"), ",Tank-HeadMaterial,horizontalTank", myTxt)
-  ' Extract the Horizontal Tank Other Request data
-  Call ExtractOneColumnData(Sheet7.Range("C27:C40"), ",Tank-OtherRequest,horizontalTank", myTxt)
-
-  ' Extract the Heater Standard data
-  Call ExtractOneColumnData(Sheet8.Range("C3:C12"), ",Heater-Standard,Heater", myTxt)
-  ' Extract the Heater HeadStyle data
-  Call ExtractOneColumnData(Sheet8.Range("D15:D19"), ",Heater-HeadStyle,Heater", myTxt)
-  ' Extract the Heater HeadMaterial data
-  Call ExtractOneColumnData(Sheet8.Range("D20:D24"), ",Heater-HeadMaterial,Heater", myTxt)
-  ' Extract the Heater Other Request data
-  Call ExtractOneColumnData(Sheet8.Range("C27:C40"), ",Heater-OtherRequest,Heater", myTxt)
-
-  myTxt.Close
-  Set myTxt = Nothing
-  Set fso = Nothing
-End Sub
-
 Sub ExtractOneColumnData(range, dataTypeString, myTxt)
   Dim row As Integer
   row = 1
