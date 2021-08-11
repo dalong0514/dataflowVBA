@@ -1,4 +1,5 @@
 ' refactored at 2021-06-15
+' refactored at 2021-08-11
 Public Sub ExtractAllBsGCTData()
   Dim tankFileName As String
   Dim heaterFileName As String
@@ -22,7 +23,7 @@ Public Sub ExtractAllBsGCTData()
   requirementFileName = "D:\dataflowcad\bsdata\bsGCTRequirementData.txt"
   otherRequestFileName = "D:\dataflowcad\bsdata\bsGCTOtherRequestData.txt"
 
-  Call ExtractBsGCTDataToCSV(projectFileName, Sheet1.Range("D4:K5"), 2, 8)
+  Call ExtractBsGCTProjectDataToCSV(projectFileName, Sheet1.Range("D4:K5"), 1, 8)
   Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B8:X2000"), 200, 40)
   Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X200"), 200, 58)
   Call ExtractBsGCTDataToCSV(nozzleFileName, Sheet3.Range("B4:J2000"), 2000, 11)
@@ -35,6 +36,21 @@ Public Sub ExtractAllBsGCTData()
 
   MsgBox "Extract Sucess!"
 
+End Sub
+
+' 2021-08-11
+Sub ExtractBsGCTProjectDataToCSV(gctFileName, range, rowNum, columnNum)
+  Dim fso As Object
+  Dim myTxt As Object
+  Dim csvString As String
+  Set fso = CreateObject("Scripting.FileSystemObject")
+  Set myTxt = fso.CreateTextFile(Filename:=gctFileName, OverWrite:=True)
+  Call ExtractRangeNoNullData(range, rowNum, columnNum, myTxt)
+  csvString = "," & Sheet1.range("F2") & "," & Sheet1.range("O2") & "," & Sheet1.range("O3") & "," & Sheet1.range("U2") & "," & Sheet1.range("U3") & "," & Sheet1.range("X2") & "," & Sheet1.range("X3") & "," & Sheet1.range("AB2") 
+  myTxt.Write csvString
+  myTxt.Close
+  Set myTxt = Nothing
+  Set fso = Nothing
 End Sub
 
 ' refactored at 2021-06-11
@@ -63,43 +79,4 @@ Sub ExtractRangeNoNullData(range, rowNum, columnNum, myTxt)
       myTxt.Write vbCr
     End if
   Next row
-End Sub
-
-Sub ExtractOneColumnData(range, dataTypeString, myTxt)
-  Dim row As Integer
-  row = 1
-  Do While range.Cells(row, 1).Value <> ""
-    myTxt.Write dataTypeString
-    myTxt.Write ","
-    myTxt.Write range.Cells(row, 1).Value
-    myTxt.Write vbCr
-    row = row + 1
-  Loop
-End Sub
-
-Sub ExtractOneRowData(range, dataTypeString, myTxt)
-  Dim column As Integer
-  column = 1
-  myTxt.Write dataTypeString
-  Do While range.Cells(1, column).Value <> ""
-    myTxt.Write ","
-    myTxt.Write range.Cells(1, column).Value
-    column = column + 1
-  Loop
-  myTxt.Write vbCr
-End Sub
-
-Sub ExtractColumnsData(range, columnNum, dataTypeString, myTxt)
-  Dim row As Integer, column As Integer
-  row = 1
-  column = 1
-  Do While range.Cells(row, 1).Value <> ""
-    myTxt.Write dataTypeString
-    For column = 1 To columnNum
-      myTxt.Write ","
-      myTxt.Write range.Cells(row, column).Value
-    Next column
-    myTxt.Write vbCr
-    row = row + 1
-  Loop
 End Sub
