@@ -1,5 +1,6 @@
 ' refactored at 2021-06-15
 ' refactored at 2021-08-11
+' refactored at 2021-08-13
 Public Sub ExtractAllBsGCTData()
   Dim tankFileName As String
   Dim heaterFileName As String
@@ -24,11 +25,11 @@ Public Sub ExtractAllBsGCTData()
   otherRequestFileName = "D:\dataflowcad\bsdata\bsGCTOtherRequestData.txt"
 
   Call ExtractBsGCTProjectDataToCSV(projectFileName, Sheet1.Range("D4:K5"), 1, 8)
-  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B8:X2000"), 200, 40)
-  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X200"), 200, 58)
+  Call ExtractBsGCTDataToCSV(tankFileName, Sheet1.Range("B8:X2000"), 200, 42)
+  Call ExtractBsGCTDataToCSV(heaterFileName, Sheet2.Range("B4:X200"), 200, 60)
   Call ExtractBsGCTDataToCSV(nozzleFileName, Sheet3.Range("B4:J2000"), 2000, 11)
   Call ExtractBsGCTDataToCSV(supportFileName, Sheet5.Range("B4:G1000"), 1000, 6)
-  Call ExtractBsGCTDataToCSV(reactorFileName, Sheet9.Range("B4:X200"), 200, 57)
+  Call ExtractBsGCTDataToCSV(reactorFileName, Sheet9.Range("B4:X200"), 200, 59)
   Call ExtractBsGCTDataToCSV(pressureElementFileName, Sheet4.Range("B4:H500"), 500, 7)
   Call ExtractBsGCTDataToCSV(standardFileName, Sheet6.Range("B4:D500"), 500, 3)
   Call ExtractBsGCTDataToCSV(requirementFileName, Sheet7.Range("B4:E500"), 500, 4)
