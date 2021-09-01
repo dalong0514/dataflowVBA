@@ -1,4 +1,5 @@
 ' 2021-08-27
+' refactored at 2021-09-01
 Sub ExtractGsLcModuleData()
   Dim fso As Object
   Dim myTxt As Object
@@ -11,8 +12,9 @@ Sub ExtractGsLcModuleData()
 
   ' the column in range could be wrong, still ok. eg [X100]
   ' Call ExtractProjectInfoToJsonString(myTxt)
-  Call ExtractRangeDataToJsonStringByDataType(Sheet1.range("B2:L2"), Sheet1.range("B4:L100"), 100, 11, myTxt, "equipModule")
-  Call ExtractRangeDataToJsonStringByDataType(Sheet2.range("C2:S2"), Sheet2.range("C4:S500"), 500, 18, myTxt, "moduleCorrespond")
+  Call ExtractRangeDataToJsonStringByDataType(Sheet1.range("B2:L2"), Sheet1.range("B4:L100"), 100, 3, myTxt, "moduleBuild")
+  Call ExtractRangeDataToJsonStringByDataType(Sheet2.range("B2:L2"), Sheet2.range("B4:L100"), 100, 6, myTxt, "moduleEquip")
+  Call ExtractRangeDataToJsonStringByDataType(Sheet3.range("C2:S2"), Sheet3.range("C4:S500"), 500, 18, myTxt, "moduleCorrespond")
 
   myTxt.Close
   Set myTxt = Nothing
@@ -63,6 +65,9 @@ Function ConvertString(cellString)
   resultString = chr(34) & cellString & chr(34)
   ConvertString = resultString
 End Function
+
+
+
 
 Sub ExtractProjectInfoToJsonString(myTxt)
   Dim jsonString As String
