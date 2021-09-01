@@ -1,4 +1,5 @@
 ' 2021-08-28
+' Abandoned at 2021-09-01 Exported by CAD
 Sub ExtractGsLcFYJQDataBase()
   Dim fso As Object
   Dim myTxt As Object

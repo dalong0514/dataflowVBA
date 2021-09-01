@@ -12,7 +12,7 @@ Sub ExtractGsLcModuleData()
   ' the column in range could be wrong, still ok. eg [X100]
   ' Call ExtractProjectInfoToJsonString(myTxt)
   Call ExtractRangeDataToJsonStringByDataType(Sheet1.range("B2:L2"), Sheet1.range("B4:L100"), 100, 11, myTxt, "equipModule")
-  Call ExtractRangeDataToJsonStringByDataType(Sheet2.range("C2:S2"), Sheet2.range("C4:S500"), 500, 17, myTxt, "moduleCorrespond")
+  Call ExtractRangeDataToJsonStringByDataType(Sheet2.range("C2:S2"), Sheet2.range("C4:S500"), 500, 18, myTxt, "moduleCorrespond")
 
   myTxt.Close
   Set myTxt = Nothing
