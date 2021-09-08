@@ -1,5 +1,6 @@
 ' 2021-08-27
 ' refactored at 2021-09-01
+' refactored at 2021-09-02
 Sub ExtractGsLcModuleData()
   Dim fso As Object
   Dim myTxt As Object
@@ -11,8 +12,8 @@ Sub ExtractGsLcModuleData()
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
 
   ' the column in range could be wrong, still ok. eg [X100]
-  ' Call ExtractProjectInfoToJsonString(myTxt)
-  Call ExtractRangeDataToJsonStringByDataType(Sheet1.range("B2:L2"), Sheet1.range("B4:L100"), 100, 3, myTxt, "moduleBuild")
+  Call ExtractProjectInfoToJsonString(myTxt)
+  Call ExtractRangeDataToJsonStringByDataType(Sheet1.range("B4:L4"), Sheet1.range("B6:L100"), 100, 3, myTxt, "moduleBuild")
   Call ExtractRangeDataToJsonStringByDataType(Sheet2.range("B2:L2"), Sheet2.range("B4:L100"), 100, 6, myTxt, "moduleEquip")
   Call ExtractRangeDataToJsonStringByDataType(Sheet3.range("C2:S2"), Sheet3.range("C4:S500"), 500, 18, myTxt, "moduleCorrespond")
 
@@ -66,13 +67,10 @@ Function ConvertString(cellString)
   ConvertString = resultString
 End Function
 
-
-
-
 Sub ExtractProjectInfoToJsonString(myTxt)
   Dim jsonString As String
   myTxt.Write "{"
-  jsonString = ConvertString("projectNum") & ":" & ConvertString(Sheet1.range("D2")) & "," & ConvertString("dataClass") & ":" & ConvertString("pressure")
+  jsonString = ConvertString("dataClass") & ":" & ConvertString("projectInfo") & "," & ConvertString("PROJECT") & ":" & ConvertString(Sheet1.range("C1")) & "," & ConvertString("UNITNAME") & ":" & ConvertString(Sheet1.range("C2")) & "," & ConvertString("ProjM") & ":" & ConvertString(Sheet1.range("I1")) & "," & ConvertString("SpeciM") & ":" & ConvertString(Sheet1.range("I2")) & "," & ConvertString("Made") & ":" & ConvertString(Sheet1.range("K1")) & "," & ConvertString("Chkd") & ":" & ConvertString(Sheet1.range("K2")) & "," & ConvertString("Appr") & ":" & ConvertString(Sheet1.range("M1")) & "," & ConvertString("AuthD") & ":" & ConvertString(Sheet1.range("M2")) & "," & ConvertString("projectNum") & ":" & ConvertString(Sheet1.range("G1")) & "," & ConvertString("monomertNum") & ":" & ConvertString(Sheet1.range("G2"))
   myTxt.Write jsonString
   myTxt.Write "}"
   myTxt.Write vbCr
