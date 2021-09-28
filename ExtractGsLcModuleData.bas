@@ -1,6 +1,7 @@
 ' 2021-08-27
 ' refactored at 2021-09-01
 ' refactored at 2021-09-02
+' refactored at 2021-09-11
 Sub ExtractGsLcModuleData()
   Dim fso As Object
   Dim myTxt As Object
@@ -15,7 +16,8 @@ Sub ExtractGsLcModuleData()
   Call ExtractProjectInfoToJsonString(myTxt)
   Call ExtractRangeDataToJsonStringByDataType(Sheet1.range("B14:L14"), Sheet1.range("B16:L200"), 100, 35, myTxt, "moduleBuild")
   Call ExtractRangeDataToJsonStringByDataType(Sheet2.range("B2:L2"), Sheet2.range("B4:L100"), 100, 6, myTxt, "moduleEquip")
-  Call ExtractRangeDataToJsonStringByDataType(Sheet3.range("C2:S2"), Sheet3.range("C4:S500"), 500, 18, myTxt, "moduleCorrespond")
+  Call ExtractRangeDataToJsonStringByDataType(Sheet3.range("C2:S2"), Sheet3.range("C4:S500"), 500, 23, myTxt, "moduleCorrespond")
+  Call ExtractRangeDataToJsonStringByDataType(Sheet4.range("B2:H2"), Sheet4.range("B4:H100"), 100, 8, myTxt, "publicPipeData")
 
   myTxt.Close
   Set myTxt = Nothing
