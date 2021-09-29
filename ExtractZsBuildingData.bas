@@ -7,7 +7,7 @@ Public Sub ExtractAllZsBuildingData()
   ' technicalEconomyData = "D:\dataflowcad\zsdata\zsTechnicalEconomyData.json"
   ' designExplainData = "D:\dataflowcad\zsdata\zsDesignExplainData.json"
 
-  Call ExtractZsZPDataToJson(buildingData, Sheet1.range("B4:ZZ4"), Sheet1.range("B10:ZZ200"), 200, 20)
+  Call ExtractZsZPDataToJson(buildingData, Sheet1.range("B4:ZZ4"), Sheet1.range("B7:ZZ200"), 200, 20)
   ' Call ExtractZsZPDataToCSV(technicalEconomyData, Sheet1.Range("L5:O500"), 200, 5)
   ' Call ExtractZsZPDataToCSV(designExplainData, Sheet2.Range("A3:B30"), 20, 2)
 
