@@ -10,6 +10,16 @@ Public Sub ExtractKsInstrumentLocationData()
 
 End Sub
 
+
+Public Sub ExtractKsBzInstrumentData()
+  Dim buildingData As String
+
+  buildingData = "D:\dataflowcad\ksdata\ksBzInstrumentData.json"
+  Call ExtractDataToJson(buildingData, Sheet1.range("B3:J3"), Sheet1.range("B5:J5000"), 5000, 9)
+  MsgBox "Extract Sucess!"
+
+End Sub
+
 ' 2021-10-12
 Sub ExtractDataToJson(gctFileName, keyRange, valueRange, rowNum, columnNum)
   Dim fso As Object
