@@ -4,7 +4,7 @@ Public Sub ExtractAllBsGCTTankData()
   Dim myTxt As Object
   Dim MyFName As String
   
-  MyFName = "D:\dataflowcad\bsdata\bsGCTTankData.json"
+  MyFName = "D:\dataflowcad\tempdata\bsGCTData.json"
   
   Set fso = CreateObject("Scripting.FileSystemObject")
   Set myTxt = fso.CreateTextFile(Filename:=MyFName, OverWrite:=True)
